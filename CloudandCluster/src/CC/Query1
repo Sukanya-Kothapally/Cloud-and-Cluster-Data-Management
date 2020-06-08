@@ -1,0 +1,5 @@
+
+
+Mongoshell command:
+
+db.loopdata1.count({speed : {$gt : 100}})

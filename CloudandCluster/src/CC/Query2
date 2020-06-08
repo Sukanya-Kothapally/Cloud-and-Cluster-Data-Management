@@ -1,0 +1,23 @@
+
+Mongoshell command:
+
+db.metadata.find({"location_text" : "Foster NB"}, {detector_id_array : 1, _id : 0}).pretty()
+{ "detector_id_array" : [ "1361", "1362", "1363" ] } - array returned
+
+ db.loopdata.aggregate([
+
+     {
+       $match : { $and: [{"starttime" : {$gte : ISODate("2011-09-15"), $lt : ISODate("2011-09-17")}}, {$or: [{"detectorid" : 1361}, {"detectorid" : 1362}, {"detectorid" : 1363}]}  ]}
+     },
+     {
+       $group : {
+          _id : { $dateToString: { format: "%Y-%m-%d", date: "$starttime" } },
+          totalvolume: { $sum: "$volume" },
+          count: { $sum: 1 }
+       }
+     },
+
+     {
+       $sort : { totalvolume: -1 }
+     }
+    ])
