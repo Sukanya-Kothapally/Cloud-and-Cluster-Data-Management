@@ -1,8 +1,8 @@
 
 Mongoshell command:
 
-db.metadata.find({"location_text" : "Foster NB"}, {detector_id_array : 1, _id : 0}).pretty()
-{ "detector_id_array" : [ "1361", "1362", "1363" ] } - array returned
+db.metadata.find({"location_text" : "Foster NB"}.pretty()
+{ "detector_id_array" : [ "1361", "1362", "1363" ] } - Detector id array returned
 
  db.loopdata.aggregate([
 
